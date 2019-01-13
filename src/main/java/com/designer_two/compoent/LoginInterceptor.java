@@ -12,7 +12,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException, IOException {
         Object token = request.getSession().getAttribute("token");
         if (token == null) {
-            request.getRequestDispatcher("/login").forward(request, response);
+//            request.getRequestDispatcher("/login").forward(request, response);
+            System.out.println("this is interceptor");
+            response.sendRedirect("/login");
             return false;
         }
 
