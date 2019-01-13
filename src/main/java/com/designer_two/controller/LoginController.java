@@ -31,7 +31,6 @@ public class LoginController {
     public String sign(@RequestParam("username") String username,
                          @RequestParam("pass") String pass,
                          HttpSession session) {
-        System.out.println("this is sign");
         if (!StringUtils.isEmpty(username) && "123456".equals(pass)) {
             session.setAttribute("token", username);
             return "redirect:/index";
