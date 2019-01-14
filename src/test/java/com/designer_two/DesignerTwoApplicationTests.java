@@ -1,7 +1,10 @@
 package com.designer_two;
 
+import com.designer_two.entity.AdminUser;
+import com.designer_two.repository.AdminUserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -9,8 +12,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class DesignerTwoApplicationTests {
 
+    @Autowired
+    protected AdminUserRepository adminUserRepository;
     @Test
     public void contextLoads() {
+        AdminUser user = adminUserRepository.findByUsername("admin");
+        System.out.println("test");
+        System.out.println(user.getName());
     }
 
 }
