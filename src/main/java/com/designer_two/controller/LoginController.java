@@ -1,16 +1,13 @@
 package com.designer_two.controller;
 
-import com.designer_two.entity.AdminUser;
+import com.designer_two.entity.AdminUsersEntity;
 import com.designer_two.repository.AdminUserRepository;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.ContextLoader;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +39,7 @@ public class LoginController {
                        @RequestParam("pass") String pass,
                        HttpSession session) {
         if (!StringUtils.isEmptyOrWhitespace(username)) {
-            AdminUser user = this.userRepository.findByUsername(username);
+            AdminUsersEntity user = this.userRepository.findByUsername(username);
             if (user != null) {
                 String passEncode = user.getPassword().replaceFirst("y", "a");
                 if (BCrypt.checkpw(pass, passEncode)) {

@@ -1,10 +1,10 @@
 package com.designer_two.repository;
 
-import com.designer_two.entity.AdminUser;
+import com.designer_two.entity.AdminUsersEntity;
 import org.springframework.data.repository.RepositoryDefinition;
 
 
-@RepositoryDefinition(domainClass = AdminUser.class, idClass = Integer.class)
+@RepositoryDefinition(domainClass = AdminUsersEntity.class, idClass = Integer.class)
 public interface AdminUserRepository {
-    AdminUser findByUsername(String username);
+    AdminUsersEntity findByUsername(String username);
 }
