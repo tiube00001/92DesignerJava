@@ -9,7 +9,7 @@ public class AdminRoleMenuPrimaryKey implements Serializable {
     private Integer roleId;
     private Integer menuId;
 
-    public AdminRoleMenuPrimaryKey(Integer roleId) {
+    public AdminRoleMenuPrimaryKey() {
     }
 
     public AdminRoleMenuPrimaryKey(Integer roleId, Integer menuId) {
