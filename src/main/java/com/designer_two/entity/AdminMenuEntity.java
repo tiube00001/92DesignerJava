@@ -127,4 +127,19 @@ public class AdminMenuEntity {
     public int hashCode() {
         return Objects.hash(id, parentId, order, title, icon, uri, permission, createdAt, updatedAt);
     }
+
+    @Override
+    public String toString() {
+        return "AdminMenuEntity{" +
+                "id=" + id +
+                ", parentId=" + parentId +
+                ", order=" + order +
+                ", title='" + title + '\'' +
+                ", icon='" + icon + '\'' +
+                ", uri='" + uri + '\'' +
+                ", permission='" + permission + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }

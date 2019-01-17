@@ -1,5 +1,6 @@
 package com.designer_two;
 
+import com.designer_two.compoent.SpringUtils;
 import com.designer_two.embeddable.AdminRoleMenuPrimaryKey;
 import com.designer_two.entity.AdminMenuEntity;
 import com.designer_two.entity.AdminRoleMenuEntity;
@@ -10,10 +11,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
+@Import(SpringUtils.class)
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DesignerTwoApplicationTests {
@@ -31,8 +34,7 @@ public class DesignerTwoApplicationTests {
 
     @Test
     public void primaryKeyTest() {
-        Optional<AdminRoleMenuEntity> id = adminRoleMenuRepository.findById(new AdminRoleMenuPrimaryKey(1, 8));
-        id.map(AdminRoleMenuEntity::getId).ifPresent(System.out::println);
+        adminRoleMenuRepository.findAll();
     }
 
 }

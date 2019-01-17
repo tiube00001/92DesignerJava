@@ -1,9 +1,11 @@
 package com.designer_two;
 
-import com.designer_two.entity.AdminUser;
+import com.designer_two.compoent.SpringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
+@Import(SpringUtils.class)
 @SpringBootApplication
 public class DesignerTwoApplication {
     public static void main(String[] args) {
