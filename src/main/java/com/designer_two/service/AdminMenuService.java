@@ -4,8 +4,6 @@ import com.designer_two.entity.AdminMenuEntity;
 import com.designer_two.repository.AdminMenuRepository;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-
 @Service
 public class AdminMenuService {
     private AdminMenuRepository adminMenuRepository;
