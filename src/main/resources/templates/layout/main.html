@@ -263,7 +263,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- Sidebar Menu -->
                     <ul class="sidebar-menu" data-widget="tree" id="menu">
                         <li class="header"></li>
-                        <!-- Optionally, you can add icons to the links -->
+
+                        <!-- Optionally, you can add    ns to the links -->
 
                         <!--<li class="active">-->
                             <!--<a href="#">-->
@@ -307,7 +308,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </aside>
 
             <!--Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
+            <div class="content-wrapper" layout:fragment="content">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
@@ -331,7 +332,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!--------------------------
                       | Your Page Content Here |
                       -------------------------->
-                    <div layout:fragment="content">
+                    <div>
 
                     </div>
 
@@ -437,6 +438,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Add the sidebar's background. This div must be placed
             immediately after the control sidebar -->
             <div class="control-sidebar-bg"></div>
+            <div th:text="${#httpServletRequest.getRequestURI()}"></div>
+
         </div>
         <!-- ./wrapper -->
 
@@ -462,8 +465,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 let next = [];
                 let nextId = [];
                 menu.forEach(function (item) {
+                    let nowUrl = [[${#httpServletRequest.getRequestURI()}]];
+                    let isNow = nowUrl === '/'+item.uri;
+
                     let li = $('<li>').attr('id', item.id);
-                    let a = $('<a>').attr('href', item.uri === null ? item.uri : '#');
+                    if (isNow) {
+                        li.addClass('active');
+                    }
+                    let a = $('<a>').attr('href', item.uri);
                     let span = $('<span>').html("<i class='fa fa-fw "+item.icon+"'></i>&nbsp;&nbsp;&nbsp;"+item.title);
 
                     if (loop === 0 && parseInt(item.parentId) === 0) {
@@ -477,6 +486,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         let ul = parentDom.children('.treeview-menu');
                         if (ul.length === 0) {
                             ul = $('<ul>').addClass('treeview-menu').attr('style', 'display:none;');
+                            if (isNow) {
+                                ul.attr('style', 'display:block');
+                            }
                             parentDom.append(ul);
                         }
                         ul.append(li.append(a.append(span)));
@@ -492,6 +504,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
             }
 
             viewMenu(menu, [], 0);
+
+
+            let nowUrl = [[${#httpServletRequest.getRequestURI()}]];
+            console.log(nowUrl);
+
         </script>
     </body>
 </html>
