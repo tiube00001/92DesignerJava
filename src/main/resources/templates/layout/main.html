@@ -486,6 +486,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         if (ul.length === 0) {
                             ul = $('<ul>').addClass('treeview-menu').attr('style', 'display:none;');
                             if (isNow) {
+                                parentDom.addClass('menu-open');
                                 ul.attr('style', 'display:block');
                             }
                             parentDom.append(ul);
