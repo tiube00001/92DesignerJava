@@ -15,6 +15,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="/webjars/ionicons/2.0.0/css/ionicons.min.css">
+
+        <!--select2-->
+        <link rel="stylesheet" href="/webjars/select2/4.0.5/css/select2.min.css">
+
         <!-- Theme style -->
         <link rel="stylesheet" href="/webjars/AdminLTE/2.4.3/dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -32,6 +36,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Google Font -->
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+
     </head>
     <!--
     BODY TAG OPTIONS:
@@ -448,6 +454,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
         <!-- Bootstrap 3.3.7 -->
         <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="/webjars/select2/4.0.5/js/select2.full.js"></script>
         <!-- AdminLTE App -->
         <script src="/webjars/AdminLTE/2.4.3/dist/js/adminlte.min.js"></script>
 
@@ -455,6 +462,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
              Both of these plugins are recommended to enhance the
              user experience. -->
         <script th:inline="javascript">
+
+
+
             let menu = [[${session.menu}]];
             function viewMenu(menu, lastId = [], loop = 0) {
                 if (menu.length === 0) {
@@ -508,7 +518,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             let nowUrl = [[${#httpServletRequest.getRequestURI()}]];
             console.log(nowUrl);
-
         </script>
+
+        <script>
+            $(function () {
+                //Initialize Select2 Elements
+                $('.select2').select2();
+            })
+        </script>
+
     </body>
 </html>

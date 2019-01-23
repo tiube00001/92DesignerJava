@@ -51,6 +51,19 @@ public class AdminPermissionsEntity {
         return httpMethod;
     }
 
+    @Override
+    public String toString() {
+        return "AdminPermissionsEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", slug='" + slug + '\'' +
+                ", httpMethod='" + httpMethod + '\'' +
+                ", httpPath='" + httpPath + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
+
     public void setHttpMethod(String httpMethod) {
         this.httpMethod = httpMethod;
     }
