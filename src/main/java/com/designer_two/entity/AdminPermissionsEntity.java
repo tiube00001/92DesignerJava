@@ -15,6 +15,7 @@ public class AdminPermissionsEntity {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {

@@ -346,6 +346,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- /.content -->
             </div>
 
+
+
+
             <!-- /.content-wrapper -->
 
             <!-- Main Footer -->
@@ -446,6 +449,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="control-sidebar-bg"></div>
 
         </div>
+
+
+
+
+
+
         <!-- ./wrapper -->
 
         <!-- REQUIRED JS SCRIPTS -->
@@ -463,8 +472,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
              user experience. -->
         <script th:inline="javascript">
 
-
-
             let menu = [[${session.menu}]];
             function viewMenu(menu, lastId = [], loop = 0) {
                 if (menu.length === 0) {
@@ -475,14 +482,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 let nextId = [];
                 menu.forEach(function (item) {
                     let nowUrl = [[${#httpServletRequest.getRequestURI()}]];
-                    let isNow = nowUrl === '/'+item.uri;
-
+                    let isNow = nowUrl === '/' + item.uri;
                     let li = $('<li>').attr('id', item.id);
                     if (isNow) {
                         li.addClass('active');
                     }
-                    let a = $('<a>').attr('href', item.uri);
-                    let span = $('<span>').html("<i class='fa fa-fw "+item.icon+"'></i>&nbsp;&nbsp;&nbsp;"+item.title);
+                    let a = $('<a>').attr('href', '/' + item.uri);
+                    let span = $('<span>').html("<i class='fa fa-fw " + item.icon + "'></i>&nbsp;&nbsp;&nbsp;" + item.title);
 
                     if (loop === 0 && parseInt(item.parentId) === 0) {
                         //当是1级菜单时
@@ -495,12 +501,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         let ul = parentDom.children('.treeview-menu');
                         if (ul.length === 0) {
                             ul = $('<ul>').addClass('treeview-menu').attr('style', 'display:none;');
-                            if (isNow) {
-                                parentDom.addClass('menu-open');
-                                ul.attr('style', 'display:block');
-                            }
                             parentDom.append(ul);
                         }
+
+                        if (isNow) {
+                            parentDom.addClass('menu-open');
+                            ul.attr('style', 'display:block');
+                        }
+
                         ul.append(li.append(a.append(span)));
 
                         nextId.push(item.id)
@@ -514,10 +522,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             }
 
             viewMenu(menu, [], 0);
-
-
-            let nowUrl = [[${#httpServletRequest.getRequestURI()}]];
-            console.log(nowUrl);
         </script>
 
         <script>
@@ -528,4 +532,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </script>
 
     </body>
+
+    <div id="alert" style="width: 250px; position: fixed; right: 20px; top: 80px; display: none">
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-check"></i> 操作成功</h4>
+        </div>
+    </div>
+    <script>
+        let status = [[${status}]];
+        if (status) {
+            let css = "";
+            switch (parseInt(status)) {
+                case 1:
+                    css = "alert-success";
+                    break;
+                case 2:
+                    css = "alert-error";
+                    break;
+                case 3:
+                    css = "alert-warning";
+                    break;
+            }
+
+            let alert = $('#alert');
+            alert.children('div').removeClass().attr("class", "alert alert-dismissible "+css);
+            alert.show();
+            setTimeout(function () {
+                alert.hide();
+            }, 2000)
+
+        }
+    </script>
 </html>
