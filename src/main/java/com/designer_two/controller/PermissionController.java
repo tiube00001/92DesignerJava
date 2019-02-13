@@ -2,6 +2,8 @@ package com.designer_two.controller;
 
 import com.designer_two.entity.AdminPermissionsEntity;
 import com.designer_two.repository.AdminPermissionsRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,21 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
+
 
 @Controller
 @RequestMapping(value = "/auth")
 public class PermissionController {
     private AdminPermissionsRepository adminPermissionsRepository;
 
-    public PermissionController(AdminPermissionsRepository adminPermissionsRepository) {
-        this.adminPermissionsRepository = adminPermissionsRepository;
+    public PermissionController(AdminPermissionsRepository repository) {
+        this.adminPermissionsRepository = repository;
     }
 
     @GetMapping(value = "permissions")
-    public String index() {
+    public String index(Model model) {
+        Page<AdminPermissionsEntity> all = adminPermissionsRepository.findAll(PageRequest.of(0, 3));
+        model.addAttribute("page", all);
         return "permission/list";
     }
 
@@ -38,11 +41,10 @@ public class PermissionController {
     @PostMapping(value = "permissions/store")
     public String store(@ModelAttribute AdminPermissionsEntity permissions, RedirectAttributes attr) {
 
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        Timestamp timestamp = Timestamp.valueOf(format.format(new Date()));
-//        permissions.setUpdatedAt(timestamp);
-//        permissions.setCreatedAt(timestamp);
-//        adminPermissionsRepository.save(permissions);
+        Timestamp timestamp = new Timestamp((new Date()).getTime());
+        permissions.setUpdatedAt(timestamp);
+        permissions.setCreatedAt(timestamp);
+        adminPermissionsRepository.save(permissions);
         attr.addFlashAttribute("status", 1);
         return "redirect:/auth/permissions";
     }

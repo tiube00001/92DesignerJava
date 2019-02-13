@@ -21,7 +21,7 @@ public class UserController {
     }
     @GetMapping(value = "")
     public String users(Model model) {
-        Page<AdminUsersEntity> all = adminUserRepository.findAll(new PageRequest(0, 3));
+        Page<AdminUsersEntity> all = adminUserRepository.findAll(PageRequest.of(0, 3));
         model.addAttribute("page", all);
         return "user/list";
     }

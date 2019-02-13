@@ -36,7 +36,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap">
                     <div class="row">
                         <div class="col-sm-6"></div>
                         <div class="col-sm-6"></div>
@@ -54,15 +54,19 @@
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                                         aria-label="Browser: activate to sort column ascending">
-                                        帐号
+                                        名称
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                                         aria-label="Platform(s): activate to sort column ascending">
-                                        昵称
+                                        标识
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                                         aria-label="Engine version: activate to sort column ascending">
-                                        头像
+                                        请求方法
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                                        aria-label="Engine version: activate to sort column ascending">
+                                        请求路径
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                                         aria-label="CSS grade: activate to sort column ascending">
@@ -79,14 +83,13 @@
                                 </tr>
                                 </thead>
 
-                                <tbody th:each="item,index:${page}">
-                                <tr role="row" class="odd">
+                                <tbody>
+                                <tr role="row" class="odd" th:each="item,index:${page}">
                                     <td th:text="${item.id}"></td>
-                                    <td th:text="${item.username}"></td>
                                     <td th:text="${item.name}"></td>
-                                    <td>
-                                        <img th:src="${item.avatar}">
-                                    </td>
+                                    <td th:text="${item.slug}"></td>
+                                    <td th:text="${item.httpMethod}"></td>
+                                    <td th:text="${item.httpPath}"></td>
                                     <td th:text="${item.createdAt}"></td>
                                     <td th:text="${item.updatedAt}"></td>
                                     <td>
