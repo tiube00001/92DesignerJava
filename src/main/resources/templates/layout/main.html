@@ -26,6 +26,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
               apply the skin class to the body tag so the changes take effect. -->
         <link rel="stylesheet" href="/webjars/AdminLTE/2.4.3/dist/css/skins/skin-blue.min.css">
 
+
+        <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Bootstrap 3.3.7 -->
+        <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="/webjars/select2/4.0.5/js/select2.full.js"></script>
+        <!-- AdminLTE App -->
+        <script src="/webjars/AdminLTE/2.4.3/dist/js/adminlte.min.js"></script>
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -460,12 +468,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- REQUIRED JS SCRIPTS -->
 
         <!-- jQuery 3 -->
-        <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
-        <!-- Bootstrap 3.3.7 -->
-        <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="/webjars/select2/4.0.5/js/select2.full.js"></script>
-        <!-- AdminLTE App -->
-        <script src="/webjars/AdminLTE/2.4.3/dist/js/adminlte.min.js"></script>
+
 
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the
@@ -482,12 +485,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 let nextId = [];
                 menu.forEach(function (item) {
                     let nowUrl = [[${#httpServletRequest.getRequestURI()}]];
-                    let isNow = nowUrl === '/' + item.uri;
+
+                    let href = '';
+                    if (item.uri !== null && item.uri.length > 0) {
+                        href = (item.uri[0] === '/' ? '' : '/') + item.uri
+                    }
+
+                    let isNow = nowUrl === href;
                     let li = $('<li>').attr('id', item.id);
                     if (isNow) {
                         li.addClass('active');
                     }
-                    let a = $('<a>').attr('href', '/' + item.uri);
+
+                    console.log(href);
+
+                    let a = $('<a>').attr('href', href);
                     let span = $('<span>').html("<i class='fa fa-fw " + item.icon + "'></i>&nbsp;&nbsp;&nbsp;" + item.title);
 
                     if (loop === 0 && parseInt(item.parentId) === 0) {
@@ -540,7 +552,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
     </div>
     <script>
-        let status = [[${status}]];
+        let status = '[[${status}]]';
         if (status) {
             let css = "";
             switch (parseInt(status)) {
