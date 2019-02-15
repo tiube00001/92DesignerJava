@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="row"
+         th:fragment="page(page)"
+         th:if="${page.getNumberOfElements()} > 0">
+        <div class="col-sm-5">
+            <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
+                显示第
+                <span th:text="${page.getNumber()} * ${page.getSize()} + 1"></span>
+
+                <span th:if="${page.getNumberOfElements()} > 1">
+                    至<span th:text="${page.getNumber()} * ${page.getSize()} + ${page.getNumberOfElements()}"></span>
+                </span>
+                行，总共：
+                <span th:text="${page.getTotalElements()}"></span>
+                行数据
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div class="dataTables_paginate paging_simple_numbers pull-right" id="example2_paginate">
+                <ul id="page-ul" class="pagination">
+                    <li th:class="(${page.hasPrevious()}) ? 'paginate_button previous' : 'paginate_button previous disabled'"
+                        id="example2_previous">
+                        <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0"
+                           th:attr="page-num=(${page.getNumber() -1 })"
+                        >上一页</a>
+                    </li>
+                    <!--active-->
+
+                    <li th:class="(${i} == ${page.getNumber()}) ? 'paginate_button active' : 'paginate_button'"
+                        th:each="i:${#numbers.sequence(0, page.getTotalPages() - 1)}"
+                    >
+                        <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" th:text="${i + 1}"
+                           th:attr="page-num=${i}"
+                        ></a>
+                    </li>
+                    <li th:class="${page.hasNext()} ? 'paginate_button next' : 'paginate_button next disabled'" id="example2_next">
+                        <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0"
+                           th:attr="page-num=((${page.hasNext()}) ? (${page.getNumber() + 1}) : -1)"
+                        >下一页</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script th:inline="javascript">
+            let baseUri = [[${#httpServletRequest.getRequestURI()}]];
+            let baseQuery = [[${#httpServletRequest.getQueryString()}]] ? [[${#httpServletRequest.getQueryString()}]] : false;
+            let params = {};
+            if (baseQuery !== false) {
+                for( let v of baseQuery.trim().split('&')){
+                    let item = v.split('=');
+                    params[item[0]] = item[1];
+                }
+            }
+            $('#page-ul').children('li').each(function (index, item) {
+                let a = $(item).find('a');
+                let queryStr = 'javascript:void(0);';
+                let page = a.attr('page-num');
+                if (page < 0) {
+                    a.attr('href', queryStr);
+                } else {
+                    params['page'] = a.attr('page-num');
+                    console.log(params);
+                    queryStr = '?';
+                    for (let k in params) {
+                        if (params.hasOwnProperty(k)) {
+                            queryStr += k + '=' + params[k] + '&';
+                        }
+
+                    }
+                    queryStr = queryStr.substr(0, queryStr.length - 1);
+                    a.attr('href', baseUri+queryStr);
+                }
+            })
+
+        </script>
+    </div>
+
+</body>
+</html>
