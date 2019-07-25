@@ -23,7 +23,7 @@ import java.util.Optional;
 @Import(SpringUtils.class)
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@MapperScan("com.designer_two.mp.mapper")
+//@MapperScan("com.designer_two.mp.mapper")
 public class DesignerTwoApplicationTests {
 
 //    @Autowired
