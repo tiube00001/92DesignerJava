@@ -1,5 +1,6 @@
 package com.designer_two;
 
+import com.designer_two.mp.entity.User;
 import org.apache.commons.codec.cli.Digest;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
@@ -46,5 +47,12 @@ public class UtilTest {
 //        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 //        String nowStr = now.format(format);
 //        System.out.println(nowStr);
+    }
+    @Test
+    public void lombok() {
+        User user = new User();
+        user.setId(1);
+        user.setName("user");
+        System.out.println(user);
     }
 }
