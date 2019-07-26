@@ -19,7 +19,7 @@
         id, username, password, name, avatar, remember_token, created_at, updated_at
     </sql>
 
-    <select id="oneUser" resultType="com.designer_two.mp.entity.AdminUsers">
+    <select id="oneUser" resultType="AdminUsers">
         SELECT * FROM admin_users WHERE id = #{id}
     </select>
 

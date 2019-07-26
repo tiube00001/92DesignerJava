@@ -1,7 +1,6 @@
 package com.designer_two.compoent;
 
-import com.designer_two.entity.AdminMenuEntity;
-import com.designer_two.repository.AdminMenuRepository;
+
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +21,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         Object menu = request.getSession().getAttribute("menu");
         //将菜单数据写入session
         if (menu == null) {
-            AdminMenuRepository menuRepository = SpringUtils.getApplicationContext().getBean(AdminMenuRepository.class);
-            Iterable<AdminMenuEntity> all = menuRepository.findAll();
-            request.getSession().setAttribute("menu", all);
+
         }
 
         return  true;

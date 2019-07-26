@@ -26,24 +26,8 @@ import java.util.Optional;
 //@MapperScan("com.designer_two.mp.mapper")
 public class DesignerTwoApplicationTests {
 
-//    @Autowired
-//    protected AdminUserRepository adminUserRepository;
-//    @Autowired
-//    protected AdminRoleMenuRepository adminRoleMenuRepository;
     @Autowired
     private AdminUsersMapper adminUsersMapper;
-//    @Test
-//    public void contextLoads() {
-//        AdminUsersEntity user = adminUserRepository.findByUsername("admin");
-//        System.out.println("test");
-//        System.out.println(user.getName());
-//    }
-//
-//    @Test
-//    public void primaryKeyTest() {
-//        adminRoleMenuRepository.findAll();
-//    }
-
 
     @Test
     public void testMpOneUser() {
@@ -52,7 +36,8 @@ public class DesignerTwoApplicationTests {
 
     @Test
     public void testXmlMap() {
-        System.out.println(adminUsersMapper.oneUser(1));
+        AdminUsers users = adminUsersMapper.oneUser(1);
+        System.out.println(users);
     }
 
 }
