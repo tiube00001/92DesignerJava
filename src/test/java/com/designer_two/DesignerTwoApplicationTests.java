@@ -50,5 +50,10 @@ public class DesignerTwoApplicationTests {
         System.out.println(adminUsersMapper.selectById(1));
     }
 
+    @Test
+    public void testXmlMap() {
+        System.out.println(adminUsersMapper.oneUser(1));
+    }
+
 }
 

@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2019-07-25
  */
 public interface AdminUsersMapper extends BaseMapper<AdminUsers> {
-
+    AdminUsers oneUser(int id);
 }
